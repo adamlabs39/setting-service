@@ -1,0 +1,71 @@
+import { DataTypes, Model } from "sequelize";
+import sequelizeInstance from "../configurations/sequelize-instance.js";
+import { uuidv7 } from "uuidv7";
+import fieldTime from "./base-model.js";
+
+export default class ProfileFaskesModel extends Model {}
+ProfileFaskesModel.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            autoIncrement: true,
+            unique: true,
+        },
+        uuid: {
+            type: DataTypes.STRING(255),
+            primaryKey: true,
+            allowNull: false,
+            defaultValue: uuidv7(),
+            unique: true,
+        },
+        faskesUuid: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        code: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+            unique: true,
+        },
+        name: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        addressUuid: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        phone: {
+            type: DataTypes.STRING(15),
+            allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        website: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        urlGmaps: {
+            type: DataTypes.STRING(500),
+            allowNull: false,
+        },
+        logo: {
+            type: DataTypes.STRING(255),
+            allowNull: true,
+        },
+        bgWarna: {
+            type: DataTypes.STRING(255),
+            allowNull: true,
+        },
+        ...fieldTime,
+    },
+    {
+        sequelize: sequelizeInstance,
+        tableName: "profile_faskes",
+        underscored: true,
+        timestamps: false,
+    }
+);
