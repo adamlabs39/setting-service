@@ -3,15 +3,26 @@ import {sequelizeInstance} from "../models/model-synchronize.js";
 import {Op} from "sequelize";
 
 export default class IntegrationRepository {
-    static async findByUuid(uuid) {
+    static async findByFaskesUuid(uuid) {
         return await sequelizeInstance.transaction(async (tr) => {
             return await IntegrationModel.findOne({
                 where: {
-                    uuid
+                    [Op.and]: [
+                        {faskesUuid: uuid},
+                        {
+                            deletedAt: {
+                                [Op.is]: null
+                            }
+                        }
+                    ]
                 },
                 transaction: tr
             });
         });
+    }
+
+    static create(req) {
+        return IntegrationModel.create(req);
     }
 
     static async update(req) {
