@@ -47,6 +47,13 @@ export default class FaskesProfileRepository {
                 transaction: tr
             });
 
+            await AddressModel.update(req.address, {
+                where: {
+                    uuid: req.address.uuid
+                },
+                transaction: tr,
+            });
+
             return affectedRow[0];
         });
     }

@@ -18,6 +18,11 @@ export default class FaskesProfileValidation {
         email: z.string().email().min(1, emailRequired),
         website: z.string().min(1, websiteRequired),
         urlGmaps: z.string().min(1, urlGmapsRequired),
+        prov : z.string(),
+        city: z.string(),
+        district : z.string(),
+        village: z.string(),
+        postalCode: z.string(),
         logo: z.string(),
         bgWarna: z.string(),
     });
