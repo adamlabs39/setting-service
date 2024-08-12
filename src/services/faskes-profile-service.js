@@ -6,9 +6,7 @@ import {toEpochDate} from "../helpers/date-helper.js";
 
 export default class FaskesProfileService {
     static async findByFaskesUuid(uuid) {
-        const profile = await FaskesProfileRepository.getByFaskesUuid(uuid);
-        if(profile === null) throw new NotfoundException('faskes profile tidak ditemukan');
-        return profile;
+        return await FaskesProfileRepository.getByFaskesUuid(uuid);
     }
 
     static async update(req) {
