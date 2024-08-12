@@ -1,10 +1,14 @@
 import express from "express";
-import HomeController from "../controllers/home-controller.js";
-import ProductController from "../controllers/product-controller.js";
+import FaskesProfileController from "../controllers/faskes-profile-controller.js";
 
 const routes = express.Router();
-routes.get("/home", HomeController.home);
+// routes.use(authorizationMiddleware);
+
+// HEALTH CHECK
 routes.get("/health", (req, res) => res.status(200).json({ message: "OK" }));
-routes.get("/product/:uuid", ProductController.findByUuid);
+
+// FASKES PROFILE
+routes.get("/faskes-profile/:uuid", FaskesProfileController.findByUuid);
+routes.put("/faskes-profile/:uuid", FaskesProfileController.update);
 
 export default routes;

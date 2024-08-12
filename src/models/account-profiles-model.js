@@ -3,8 +3,8 @@ import sequelizeInstance from "../configurations/sequelize-instance.js";
 import { uuidv7 } from "uuidv7";
 import fieldTime from "./base-model.js";
 
-export default class IntegrasiModel extends Model {}
-IntegrasiModel.init(
+export default class AccountProfilesModel extends Model {}
+AccountProfilesModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -23,47 +23,27 @@ IntegrasiModel.init(
             type: DataTypes.STRING(255),
             allowNull: false,
         },
-        baseUrl: {
+        name: {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
-        userKey: {
+        phone: {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
-        secretKey: {
+        photo: {
+            type: DataTypes.BLOB,
+            allowNull: true,
+        },
+        passLama: {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
-        consId: {
+        passBaru: {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
-        PPK: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        apiKeyPost: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        method: {
-            type: DataTypes.STRING(150),
-            allowNull: true,
-        },
-        endpoint: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        header: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        request: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        response: {
+        confirmPass: {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
@@ -71,7 +51,7 @@ IntegrasiModel.init(
     },
     {
         sequelize: sequelizeInstance,
-        tableName: "integrasi",
+        tableName: "account_profiles",
         underscored: true,
         timestamps: false,
     }
