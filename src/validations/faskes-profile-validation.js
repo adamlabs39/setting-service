@@ -10,7 +10,6 @@ import {
 export default class FaskesProfileValidation {
     static UPDATE = z.object({
         uuid: z.string().min(1, uuidRequired),
-        faskesUuid: z.string().min(1, faskesUuidRequired),
         code: z.string().min(1, codeRequired),
         name: z.string().min(1, nameRequired),
         addressUuid: z.string().min(1, addressUuidRequired),

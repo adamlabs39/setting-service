@@ -3,8 +3,7 @@ import routes from "./routes/routes.js";
 import errorMiddleware from "./middlewares/error-middleware.js";
 import IntegrationModel from "./models/integration-model.js";
 import {sequelizeInstance} from "./models/model-synchronize.js";
-import FaskesProfilesModel from "./models/faskes-profiles-model.js";
-import AddressModel from "./models/address-model.js";
+import FaskesModel from "./models/faskes-model.js";
 
 const APPLICATION_PORT = process.env.APPLICATION_PORT;
 const APPLICATION_HOST = process.env.APPLICATION_HOST;
@@ -17,27 +16,20 @@ app.use(errorMiddleware);
 app.listen(APPLICATION_PORT, APPLICATION_HOST, async () => {
     await sequelizeInstance.sync({ alter: false, force: true})
     await sequelizeInstance.transaction(async (tr) => {
-        await FaskesProfilesModel.findOrCreate(
+        await FaskesModel.findOrCreate(
             {
                 transaction: tr,
                 where: {
-                    uuid: "FP0001"
+                    uuid: "F0001"
                 },
                 defaults: {
-                    faskesUuid: "F0001",
                     code: "F0001",
                     name: "RSUD Dr. Soetomo",
-                    addressUuid: "A0001",
-                    phone: "031-5507123",
-                    email: "soetomo@example.com",
-                    website: "https://rsudsoetomo.com",
-                    urlGmaps: "https://g.page/rsudsoetomo",
-                    logo: "https://rsudsoetomo.com/logo.png",
-                    bgWarna: "#000000",
-                    status : true,
+                    status: true,
                 }
             }
-        )
+        );
+
 
         await IntegrationModel.findOrCreate(
             {
@@ -59,18 +51,6 @@ app.listen(APPLICATION_PORT, APPLICATION_HOST, async () => {
                     request: "request lorem ipsum",
                     response: "response loremipsum",
                     status : true,
-                }
-            }
-        )
-
-        await AddressModel.findOrCreate(
-            {
-                transaction: tr,
-                where: {
-                    uuid: "A0001"
-                },
-                defaults: {
-                    faskesUuid: "F0001",
                 }
             }
         )
