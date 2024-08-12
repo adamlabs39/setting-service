@@ -5,8 +5,8 @@ import NotfoundException from "../errors/notfound-exception.js";
 import {toEpochDate} from "../helpers/date-helper.js";
 
 export default class FaskesProfileService {
-    static async findByUuid(uuid) {
-        const profile = await FaskesProfileRepository.getByUuid(uuid);
+    static async findByFaskesUuid(uuid) {
+        const profile = await FaskesProfileRepository.getByFaskesUuid(uuid);
         if(profile === null) throw new NotfoundException('faskes profile tidak ditemukan');
         return profile;
     }

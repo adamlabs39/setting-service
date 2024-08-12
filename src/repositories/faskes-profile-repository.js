@@ -3,11 +3,11 @@ import FaskesProfilesModel from "../models/faskes-profiles-model.js";
 import {Op} from "sequelize";
 
 export default class FaskesProfileRepository {
-    static async getByUuid(uuid){
+    static async getByFaskesUuid(uuid){
         return await sequelizeInstance.transaction(async tr => {
             return await FaskesProfilesModel.findOne({
                 where: {
-                    uuid
+                    faskesUuid: uuid
                 },
                 transaction: tr
             });
