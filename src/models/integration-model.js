@@ -3,8 +3,8 @@ import sequelizeInstance from "../configurations/sequelize-instance.js";
 import { uuidv7 } from "uuidv7";
 import fieldTime from "./base-model.js";
 
-export default class IntegrationsModel extends Model {}
-IntegrationsModel.init(
+export default class IntegrationModel extends Model {}
+IntegrationModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
