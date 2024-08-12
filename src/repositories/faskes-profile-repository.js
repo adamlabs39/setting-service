@@ -3,59 +3,16 @@ import FaskesProfilesModel from "../models/faskes-profiles-model.js";
 import {Op} from "sequelize";
 import AddressModel from "../models/address-model.js";
 import NotfoundException from "../errors/notfound-exception.js";
-import FaskesModel from "../models/faskes-model.js";
-import {uuidv7} from "uuidv7";
 
 export default class FaskesProfileRepository {
     static async getByFaskesUuid(uuid){
         return await sequelizeInstance.transaction(async tr => {
-            let profile = await FaskesProfilesModel.findOne({
+            return await FaskesProfilesModel.findOne({
                 where: {
                     faskesUuid: uuid
                 },
                 transaction: tr
             });
-
-            if(profile === null) {
-                const faskes = await FaskesModel.findOne({
-                    where: {
-                        uuid
-                    },
-                    transaction: tr
-                });
-
-                if(faskes === null){
-                    throw new NotfoundException("Faskes not found");
-                }
-
-                 profile = await this.create({
-                    uuid: uuidv7(),
-                    faskesUuid: uuid,
-                    code: faskes.dataValues.code,
-                    name: faskes.dataValues.name,
-                    addressUuid: uuidv7(),
-                    phone: "",
-                    email: "",
-                    website: "",
-                    urlGmaps: ""
-                }, tr);
-            }
-
-            const address = await AddressModel.findOrCreate({
-                where: {
-                    uuid: profile.dataValues.addressUuid
-                },
-                transaction: tr,
-                attributes: ['uuid', 'prov', 'city', 'district', 'village', 'postal_code'],
-                defaults: {
-                    faskesUuid: profile.dataValues.faskesUuid,
-                }
-            });
-
-            return {
-                ...profile.dataValues,
-                address: address.dataValues
-            };
         });
     }
 
@@ -69,7 +26,7 @@ export default class FaskesProfileRepository {
 
     static async update(req){
         return await sequelizeInstance.transaction(async tr => {
-            const affectedRow = await FaskesProfilesModel.update(req, {
+            let affectedRow = await FaskesProfilesModel.update(req, {
                 where: {
                     [Op.and]: [
                         {uuid: req.uuid},
@@ -83,12 +40,16 @@ export default class FaskesProfileRepository {
                 transaction: tr
             });
 
-            await AddressModel.update(req.address, {
+            if (affectedRow[0] === 0) throw new NotfoundException('gagal mengupdate faskes profile, data tidak ditemukan');
+
+            affectedRow = await AddressModel.update(req.address, {
                 where: {
                     uuid: req.address.uuid
                 },
                 transaction: tr,
             });
+
+            if (affectedRow[0] === 0) throw new NotfoundException('gagal mengupdate faskes profile, data address tidak ditemukan');
 
             return affectedRow[0];
         });
