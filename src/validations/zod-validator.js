@@ -1,4 +1,4 @@
-import BadRequestException from "../exception/bad-request-exception.js";
+import BadRequestException from "../errors/bad-request-exception.js";
 
 export default class ZodValidator {
     static validate(schema, objectValidate) {

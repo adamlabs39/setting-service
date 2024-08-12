@@ -1,5 +1,5 @@
-import NotfoundException from "../exception/notfound-exception.js";
-import BadRequestException from "../exception/bad-request-exception.js";
+import NotfoundException from "../errors/notfound-exception.js";
+import BadRequestException from "../errors/bad-request-exception.js";
 
 const errorMiddleware = (error, request, response) => {
     if (error instanceof NotfoundException) {
