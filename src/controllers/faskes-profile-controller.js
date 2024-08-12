@@ -1,9 +1,9 @@
 import FaskesProfileService from "../services/faskes-profile-service.js";
 
 export default class FaskesProfileController {
-  static async findByUuid(request, response, nextFunction) {
+  static async findByFaskesUuid(request, response, nextFunction) {
     try {
-      const result = await FaskesProfileService.findByUuid(request.params.uuid);
+      const result = await FaskesProfileService.findByFaskesUuid(request.params.uuid);
       response.status(200).json(result);
     } catch (error) {
       nextFunction(error);

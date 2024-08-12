@@ -2,10 +2,6 @@ import { DataTypes } from "sequelize";
 import { toEpochDate } from "../helpers/date-helper.js";
 
 const fieldTime = {
-    status: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    },
     createdAt: {
         type: DataTypes.BIGINT,
         allowNull: false,

@@ -10,7 +10,6 @@ import {
 export default class FaskesProfileValidation {
     static UPDATE = z.object({
         uuid: z.string().min(1, uuidRequired),
-        faskesUuid: z.string().min(1, faskesUuidRequired),
         code: z.string().min(1, codeRequired),
         name: z.string().min(1, nameRequired),
         addressUuid: z.string().min(1, addressUuidRequired),
@@ -18,6 +17,11 @@ export default class FaskesProfileValidation {
         email: z.string().email().min(1, emailRequired),
         website: z.string().min(1, websiteRequired),
         urlGmaps: z.string().min(1, urlGmapsRequired),
+        prov : z.string(),
+        city: z.string(),
+        district : z.string(),
+        village: z.string(),
+        postalCode: z.string(),
         logo: z.string(),
         bgWarna: z.string(),
     });

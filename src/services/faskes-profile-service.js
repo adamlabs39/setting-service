@@ -5,15 +5,21 @@ import NotfoundException from "../errors/notfound-exception.js";
 import {toEpochDate} from "../helpers/date-helper.js";
 
 export default class FaskesProfileService {
-    static async findByUuid(uuid) {
-        const profile = await FaskesProfileRepository.getByUuid(uuid);
-        if(profile === null) throw new NotfoundException('faskes profile tidak ditemukan');
-        return profile;
+    static async findByFaskesUuid(uuid) {
+        return await FaskesProfileRepository.getByFaskesUuid(uuid);
     }
 
     static async update(req) {
         const validData = ZodValidator.validate(FaskesProfileValidation.UPDATE, req);
         validData.updatedAt = toEpochDate(new Date());
+        validData.address = {
+            uuid: validData.addressUuid,
+            prov: validData.prov,
+            city: validData.city,
+            district: validData.district,
+            village: validData.village,
+            postal_code: validData.postal_code
+        };
         const affectedRow = await FaskesProfileRepository.update(validData);
         if(affectedRow === 0) throw new NotfoundException('gagal mengupdate faskes profile, data tidak ditemukan');
         return { message: `berhasil mengupdate ${affectedRow} faskes profile` };
