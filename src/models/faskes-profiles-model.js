@@ -3,8 +3,8 @@ import sequelizeInstance from "../configurations/sequelize-instance.js";
 import { uuidv7 } from "uuidv7";
 import fieldTime from "./base-model.js";
 
-export default class PasswordOtorisasiModel extends Model {}
-PasswordOtorisasiModel.init(
+export default class FaskesProfilesModel extends Model {}
+FaskesProfilesModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -23,19 +23,40 @@ PasswordOtorisasiModel.init(
             type: DataTypes.STRING(255),
             allowNull: false,
         },
-        otorisasiMenu: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
+        code: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+            unique: true,
         },
-        passLama: {
+        name: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        addressUuid: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        phone: {
+            type: DataTypes.STRING(15),
+            allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        website: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
+        },
+        urlGmaps: {
+            type: DataTypes.STRING(500),
+            allowNull: false,
+        },
+        logo: {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
-        passBaru: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        confirmPass: {
+        bgWarna: {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
@@ -43,7 +64,7 @@ PasswordOtorisasiModel.init(
     },
     {
         sequelize: sequelizeInstance,
-        tableName: "password_otorisasi",
+        tableName: "faskes_profiles",
         underscored: true,
         timestamps: false,
     }

@@ -3,8 +3,8 @@ import sequelizeInstance from "../configurations/sequelize-instance.js";
 import { uuidv7 } from "uuidv7";
 import fieldTime from "./base-model.js";
 
-export default class ProfileAkunModel extends Model {}
-ProfileAkunModel.init(
+export default class OtoritationPasswordsModel extends Model {}
+OtoritationPasswordsModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -23,16 +23,8 @@ ProfileAkunModel.init(
             type: DataTypes.STRING(255),
             allowNull: false,
         },
-        name: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        phone: {
-            type: DataTypes.STRING(255),
-            allowNull: true,
-        },
-        photo: {
-            type: DataTypes.BLOB,
+        otorisasiMenu: {
+            type: DataTypes.INTEGER,
             allowNull: true,
         },
         passLama: {
@@ -51,7 +43,7 @@ ProfileAkunModel.init(
     },
     {
         sequelize: sequelizeInstance,
-        tableName: "profile_akuns",
+        tableName: "otoritation_passwords",
         underscored: true,
         timestamps: false,
     }
