@@ -1,6 +1,7 @@
 import express from "express";
 import routes from "./routes/routes.js";
 import errorMiddleware from "./middlewares/error-middleware.js";
+// import IntegrationModel from "./models/integration-model.js";
 // import {sequelizeInstance} from "./models/model-synchronize.js";
 // import FaskesProfilesModel from "./models/faskes-profiles-model.js";
 
@@ -36,6 +37,31 @@ app.listen(APPLICATION_PORT, APPLICATION_HOST, async () => {
     //             }
     //         }
     //     )
+    //
+    //     await IntegrationModel.findOrCreate(
+    //         {
+    //             transaction: tr,
+    //             where: {
+    //                 uuid: "I0001"
+    //             },
+    //             defaults: {
+    //                 faskesUuid: "F0001",
+    //                 baseUrl: "https://sirs.yankes.kemkes.go.id",
+    //                 userKey: "userkey lorem ipsum",
+    //                 secretKey: "secretkey lorem ipsum",
+    //                 consId: "consid lorem ipsum",
+    //                 PPK: "ppk lorem ipsum",
+    //                 apiKeyPost: "apikey lorem ipsum",
+    //                 method: "POST",
+    //                 endpoint: "/api/endpoint",
+    //                 header: "header lorem ipsum",
+    //                 request: "request lorem ipsum",
+    //                 response: "response loremipsum",
+    //                 status : true,
+    //             }
+    //         }
+    //     )
     // })
+    //
     console.log(`Server running on http://${APPLICATION_HOST}:${APPLICATION_PORT}`);
 });
