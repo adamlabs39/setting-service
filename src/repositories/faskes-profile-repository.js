@@ -1,7 +1,6 @@
 import sequelizeInstance from "../configurations/sequelize-instance.js";
 import FaskesProfilesModel from "../models/faskes-profiles-model.js";
 import {Op} from "sequelize";
-import NotfoundException from "../exception/notfound-exception.js";
 
 export default class FaskesProfileRepository {
     static async getByUuid(uuid){

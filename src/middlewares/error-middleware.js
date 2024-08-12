@@ -1,7 +1,7 @@
 import NotfoundException from "../exception/notfound-exception.js";
 import BadRequestException from "../exception/bad-request-exception.js";
 
-const errorMiddleware = (error, request, response, nextFunction) => {
+const errorMiddleware = (error, request, response) => {
     if (error instanceof NotfoundException) {
         response.status(error.code).json({message: error.message});
     } else if (error instanceof BadRequestException) {
