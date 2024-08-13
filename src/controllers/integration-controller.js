@@ -4,7 +4,7 @@ import SuccessResponse from "../responses/success-response.js";
 export default class IntegrationController {
     static async findByUuid(request, response, nextFunction) {
         try {
-            const result = await IntegrationService.findByUuid(request.params.uuid);
+            const result = await IntegrationService.findByUuid(response.locals.jwtData.faskesUuid);
             response.status(200).json(SuccessResponse("data berhasil didapat", result));
         } catch (error) {
             nextFunction(error);
