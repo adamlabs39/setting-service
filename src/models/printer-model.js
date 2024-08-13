@@ -24,15 +24,15 @@ PrinterModel.init(
             allowNull: false,
         },
         header: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.TEXT,
             allowNull: true,
         },
         background: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.TEXT,
             allowNull: true,
         },
         footer: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.TEXT,
             allowNull: true,
         },
         ...fieldTime,
