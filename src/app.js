@@ -25,7 +25,7 @@ app.listen(APPLICATION_PORT, APPLICATION_HOST, async () => {
             {
                 transaction: tr,
                 where: {
-                    uuid: "F0001"
+                    uuid: "9d403ufjh43ufh3uf8430ihf"
                 },
                 defaults: {
                     code: "F0001",

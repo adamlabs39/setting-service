@@ -10,7 +10,7 @@ const routes = express.Router();
 routes.get("/health", (req, res) => res.status(200).json({ message: "OK" }));
 
 // FASKES PROFILE
-routes.get("/faskes-profile/:uuid", FaskesProfileController.findByFaskesUuid);
+routes.get("/faskes-profile", FaskesProfileController.findByFaskesUuid);
 routes.put("/faskes-profile/:uuid", FaskesProfileController.update);
 
 // INTERGRATION

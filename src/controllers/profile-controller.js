@@ -5,7 +5,6 @@ export default class ProfileController {
     static async getProfile(request, response, nextFunction) {
         try {
             const userUuid = response.locals.jwtData.userUuid;
-            console.log("user ", userUuid);
             const profile = await ProfileService.getProfileByUuid(userUuid);
             response.status(200).json(successResponse("data berhasil didapat", profile));
         } catch (error) {
