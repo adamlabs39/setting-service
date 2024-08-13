@@ -30,7 +30,7 @@ export default class IntegrationRepository {
             const affectedRow = await IntegrationModel.update(req, {
                 where: {
                     [Op.and]: [
-                        {uuid: req.uuid},
+                        {faskes_uuid: req.uuid},
                         {
                             deletedAt: {
                                 [Op.is]: null

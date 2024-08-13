@@ -16,8 +16,8 @@ routes.put("/faskes-profile", FaskesProfileController.update);
 
 // INTERGRATION
 routes.get("/integration", IntegrationController.findByUuid);
-routes.put("/integration/vclaim/:uuid", IntegrationController.updateVclaim);
-routes.put("/integration/other/:uuid", IntegrationController.updateOther);
+routes.put("/integration/vclaim", IntegrationController.updateVclaim);
+routes.put("/integration/other", IntegrationController.updateOther);
 
 // PROFILE
 routes.get("/profile", ProfileController.getProfile);

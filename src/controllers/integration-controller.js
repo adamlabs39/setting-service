@@ -13,7 +13,7 @@ export default class IntegrationController {
 
     static async updateVclaim(request, response, nextFunction) {
         try {
-            request.body.uuid = request.params.uuid;
+            request.body.uuid = response.locals.jwtData.faskesUuid;
             const result = await IntegrationService.updateVclaim(request.body);
             response.status(200).json(result);
             response.status(200).json(SuccessResponse("data berhasil diupdate", result));
@@ -24,7 +24,7 @@ export default class IntegrationController {
 
     static async updateOther(request, response, nextFunction) {
         try {
-            request.body.uuid = request.params.uuid;
+            request.body.uuid = response.locals.jwtData.faskesUuid;
             const result = await IntegrationService.updateOther(request.body);
             response.status(200).json(result);
             response.status(200).json(SuccessResponse("data berhasil diupdate", result));
