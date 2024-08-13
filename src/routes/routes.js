@@ -12,7 +12,7 @@ routes.get("/health", (req, res) => res.status(200).json({ message: "OK" }));
 
 // FASKES PROFILE
 routes.get("/faskes-profile", FaskesProfileController.findByFaskesUuid);
-routes.put("/faskes-profile/:uuid", FaskesProfileController.update);
+routes.put("/faskes-profile", FaskesProfileController.update);
 
 // INTERGRATION
 routes.get("/integration", IntegrationController.findByUuid);

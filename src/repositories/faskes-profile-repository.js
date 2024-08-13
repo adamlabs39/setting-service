@@ -29,7 +29,7 @@ export default class FaskesProfileRepository {
             let affectedRow = await FaskesProfilesModel.update(req, {
                 where: {
                     [Op.and]: [
-                        {uuid: req.uuid},
+                        {faskesUuid: req.uuid},
                         {
                             deletedAt: {
                                 [Op.is]: null
