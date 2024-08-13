@@ -34,7 +34,7 @@ export default class PrinterRepository {
             let affectedRow = await PrinterModel.update(req, {
                 where: {
                     [Op.and]: [
-                        {uuid: req.uuid},
+                        {faskes_uuid: req.uuid},
                         {
                             deletedAt: {
                                 [Op.is]: null

@@ -14,7 +14,7 @@ export default class PrinterController {
 
     static async update(request, response, nextFunction) {
         try {
-            request.body.uuid = request.params.uuid;
+            request.body.uuid = response.locals.jwtData.faskesUuid;
             const result = await PrinterService.update(request.body);
             response.status(200).json(result);
         } catch (error) {

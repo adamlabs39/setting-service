@@ -25,6 +25,6 @@ routes.put("/profile", ProfileController.updateProfile);
 
 // PRINTER
 routes.get("/printer", PrinterController.findByUuid);
-routes.put("/printer/:uuid", PrinterController.update);
+routes.put("/printer", PrinterController.update);
 
 export default routes;
