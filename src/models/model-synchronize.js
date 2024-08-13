@@ -7,6 +7,7 @@ import PermissionModel from "./permission-model.js";
 import FaskesProfilesModel from "./faskes-profiles-model.js";
 import FaskesModel from "./faskes-model.js";
 import UserModel from "./user-model.js";
+import RoleModel from "./role-model.js";
 
 export {
     sequelizeInstance,
@@ -17,5 +18,6 @@ export {
     IntegrationModel,
     PrinterModel,
     FaskesModel,
-    UserModel
+    UserModel,
+    RoleModel
 };
