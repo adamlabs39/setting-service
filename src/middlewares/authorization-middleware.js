@@ -17,6 +17,8 @@ const authorizationMiddleware = async (request, response, nextFunction) => {
       request.author = isTokenValid;
       const user = await AuthenticationService.isTokenExist(isTokenValid.username);
       if(!user) response.status(401).json({message: `token tidak valid, silakan login kembali`})
+
+      response.locals.jwtData = isTokenValid;
       nextFunction();
     }
   } catch (error) {

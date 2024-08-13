@@ -58,18 +58,26 @@ UserModel.init(
             type: DataTypes.STRING(1000),
             allowNull: true,
         },
-        iventoryMedis: {
+        inventoryMedis: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             unique: false,
         },
-        iventoryNonMedis: {
+        inventoryNonMedis: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             unique: false,
         },
         photo: {
-            type: DataTypes.BLOB,
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+        awalan_gelar : {
+            type: DataTypes.STRING(50),
+            allowNull: true,
+        },
+        akhiran_gelar : {
+            type: DataTypes.STRING(50),
             allowNull: true,
         },
         status: {

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import {faskesUuidRequired, uuidRequired} from "./message-validation-error.js";
+import {uuidRequired} from "./message-validation-error.js";
 
 export default class IntegrationValidation {
     static UPDATEVCLAIM = z.object(

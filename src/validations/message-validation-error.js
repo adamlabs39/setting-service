@@ -8,6 +8,7 @@ const phoneRequired = `phone ${REQUIRED}`;
 const emailRequired = `email ${REQUIRED}`;
 const websiteRequired = `website ${REQUIRED}`;
 const urlGmapsRequired = `urlGmaps ${REQUIRED}`;
+const photoRequired = `photo ${REQUIRED}`;
 
 export {
     uuidRequired,
@@ -19,4 +20,5 @@ export {
     emailRequired,
     websiteRequired,
     urlGmapsRequired,
+    photoRequired
 };
