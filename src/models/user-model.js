@@ -58,12 +58,12 @@ UserModel.init(
             type: DataTypes.STRING(1000),
             allowNull: true,
         },
-        inventoryMedis: {
+        iventoryMedis: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             unique: false,
         },
-        inventoryNonMedis: {
+        iventoryNonMedis: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             unique: false,

@@ -4,6 +4,7 @@ import UserModel from "../models/user-model.js";
 import {Op} from "sequelize";
 import RoleModel from "../models/role-model.js";
 import RoleRepository from "./role-repository.js";
+import NotfoundException from "../errors/notfound-exception.js";
 
 export default class ProfileRepository {
     static async getByUuid(uuid) {
@@ -19,9 +20,13 @@ export default class ProfileRepository {
                         }
                     ]
                 },
-                attributes: ["uuid", "username", "name", "email", 'password' , "photo", "role_uuid", 'phone', 'inventory_medis', 'inventory_non_medis'],
+                attributes: ["uuid", "username", "name", "email", 'password' , "photo", "role_uuid", 'phone', 'iventory_medis', 'iventory_non_medis'],
                 transaction: tr
             });
+
+            if (!user) {
+                throw new NotfoundException("User not found");
+            }
 
             const role = await RoleRepository.findByUuid(user.dataValues.role_uuid);
 

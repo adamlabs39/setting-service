@@ -1,6 +1,6 @@
 import FaskesModel from "../models/faskes-model.js";
 import {Op} from "sequelize";
-import {sequelizeInstance} from "../models/model-synchronize.js";
+import sequelizeInstance from "../configurations/sequelize-instance.js";
 
 export default class FaskesRepository {
     static async findByUuid(uuid) {

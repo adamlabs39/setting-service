@@ -1,6 +1,6 @@
 import IntegrationModel from "../models/integration-model.js";
-import {sequelizeInstance} from "../models/model-synchronize.js";
 import {Op} from "sequelize";
+import sequelizeInstance from "../configurations/sequelize-instance.js";
 
 export default class IntegrationRepository {
     static async findByFaskesUuid(uuid) {

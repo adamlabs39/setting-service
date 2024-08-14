@@ -3,6 +3,7 @@ import FaskesProfilesModel from "../models/faskes-profiles-model.js";
 import {Op} from "sequelize";
 import AddressModel from "../models/address-model.js";
 import NotfoundException from "../errors/notfound-exception.js";
+import InternalServerException from "../errors/internal-server-exception.js";
 
 export default class FaskesProfileRepository {
     static async getByFaskesUuid(uuid){
@@ -49,7 +50,7 @@ export default class FaskesProfileRepository {
                 transaction: tr,
             });
 
-            if (affectedRow[0] === 0) throw new NotfoundException('gagal mengupdate faskes profile, data address tidak ditemukan');
+            if (affectedRow[0] === 0) throw new InternalServerException('gagal mengupdate faskes profile, data address tidak ditemukan');
 
             return affectedRow[0];
         });

@@ -1,13 +1,22 @@
-version: "3.8"
+version: '3.3'
 services:
-  postgres:
-    image: postgres:latest
+  app:
+    build: .
+    container_name: adameds-setting
     ports:
-      - 5432:5432
+      - ${APPLICATION_PORT}:${APPLICATION_PORT}
+    restart: always
+    networks:
+        - adameds-network
     environment:
-      - POSTGRES_PASSWORD=sample_pass
-      - POSTGRES_USER=alliano-dev
-    volumes:
-      - pg_volume:/var/lib/postgresql/data
-volumes:
-  pg_volume: {}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_DIALECT=${DB_DIALECT}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - APPLICATION_PORT=${APPLICATION_PORT}
+      - APPLICATION_HOST=${APPLICATION_HOST}
+networks:
+    adameds-network:
+        driver: bridge
