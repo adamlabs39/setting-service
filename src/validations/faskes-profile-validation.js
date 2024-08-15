@@ -22,6 +22,7 @@ export default class FaskesProfileValidation {
         district : z.string(),
         village: z.string(),
         postalCode: z.string(),
+        fullAddress: z.string(),
         logo: z.string(),
         bgWarna: z.string(),
     });

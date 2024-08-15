@@ -4,6 +4,7 @@ import PrinterRepository from "../repositories/printer-repository.js";
 import ZodValidator from "../validations/zod-validator.js";
 import PrinterValidation from "../validations/printer-validation.js";
 import {toEpochDate} from "../helpers/date-helper.js";
+import Utils from "../helpers/utils.js";
 
 export default class PrinterService {
     static async findByUuid(uuid) {
@@ -16,7 +17,7 @@ export default class PrinterService {
             data = await PrinterRepository.create({faskesUuid : uuid})
         }
 
-        return data;
+        return Utils.camelToSnakeObject(data.dataValues);
     }
 
     static async update(req) {

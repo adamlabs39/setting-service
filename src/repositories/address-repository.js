@@ -9,7 +9,7 @@ export default class AddressRepository {
                         uuid: req.uuid
                     },
                     transaction: tr,
-                    attributes: ['uuid', 'prov', 'city', 'district', 'village', 'postal_code'],
+                    attributes: ['uuid', 'prov', 'city', 'district', 'village', 'postal_code', 'full_address'],
                     defaults: {
                         faskesUuid: req.faskesUuid,
                     }

@@ -4,6 +4,7 @@ import ZodValidator from "../validations/zod-validator.js";
 import {toEpochDate} from "../helpers/date-helper.js";
 import IntegrationValidation from "../validations/integration-validation.js";
 import FaskesRepository from "../repositories/faskes-repository.js";
+import Utils from "../helpers/utils.js";
 
 export default class IntegrationService {
     static async findByUuid(uuid) {
@@ -15,11 +16,11 @@ export default class IntegrationService {
             data = await IntegrationRepository.create({faskesUuid : uuid})
         }
 
-        return data;
+        return Utils.camelToSnakeObject(data.dataValues, ['PPK']);
     }
 
     static async updateVclaim(req) {
-        const validData = ZodValidator.validate(IntegrationValidation.UPDATEVCLAIM, req);
+        const validData = ZodValidator.validate(IntegrationValidation.UPDATEVCLAIM, Utils.snakeToCamelObject(req));
         validData.updatedAt = toEpochDate(new Date());
         const affectedRow = await IntegrationRepository.update(validData);
         if(affectedRow === 0) throw new NotfoundException('gagal mengupdate integrasi, data tidak ditemukan');
@@ -27,7 +28,7 @@ export default class IntegrationService {
     }
 
     static async updateOther(req) {
-        const validData = ZodValidator.validate(IntegrationValidation.UPDATEOTHER, req);
+        const validData = ZodValidator.validate(IntegrationValidation.UPDATEOTHER, Utils.snakeToCamelObject(req));
         validData.updatedAt = toEpochDate(new Date());
         const affectedRow = await IntegrationRepository.update(validData);
         if(affectedRow === 0) throw new NotfoundException('gagal mengupdate integrasi, data tidak ditemukan');

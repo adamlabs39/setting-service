@@ -6,6 +6,7 @@ import {toEpochDate} from "../helpers/date-helper.js";
 import FaskesRepository from "../repositories/faskes-repository.js";
 import {uuidv7} from "uuidv7";
 import AddressRepository from "../repositories/address-repository.js";
+import Utils from "../helpers/utils.js";
 
 export default class FaskesProfileService {
     static async findByFaskesUuid(uuid) {
@@ -30,20 +31,21 @@ export default class FaskesProfileService {
         const address = await AddressRepository.getOrCreateBy({uuid: profile.dataValues.addressUuid, faskesUuid: uuid});
 
         return {
-            ...profile.dataValues,
+            ...Utils.camelToSnakeObject(profile.dataValues),
             address: {
                 uuid: address[0].dataValues.uuid,
                 prov: address[0].dataValues.prov,
                 city: address[0].dataValues.city,
                 district: address[0].dataValues.district,
                 village: address[0].dataValues.village,
-                postal_code: address[0].dataValues.postal_code
+                postal_code: address[0].dataValues.postalCode,
+                full_address : address[0].dataValues.fullAddress
             }
         };
     }
 
     static async update(req) {
-        const validData = ZodValidator.validate(FaskesProfileValidation.UPDATE, req);
+        const validData = ZodValidator.validate(FaskesProfileValidation.UPDATE, Utils.snakeToCamelObject(req));
         validData.updatedAt = toEpochDate(new Date());
         validData.address = {
             uuid: validData.addressUuid,
@@ -51,7 +53,8 @@ export default class FaskesProfileService {
             city: validData.city,
             district: validData.district,
             village: validData.village,
-            postal_code: validData.postal_code
+            postal_code: validData.postalCode,
+            full_address: validData.fullAddress
         };
         const affectedRow = await FaskesProfileRepository.update(validData);
         if (affectedRow === 0) throw new NotfoundException('gagal mengupdate faskes profile, data tidak ditemukan');
