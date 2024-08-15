@@ -11,23 +11,23 @@ const routes = express.Router();
 // routes.use(authorizationMiddleware);
 
 // HEALTH CHECK
-routes.get(`/${apiBase}/${apiVersion}/health`, (req, res) => res.status(200).json({ message: "OK" }));
+routes.get(`/${apiBase}/${apiVersion}/setting/health`, (req, res) => res.status(200).json({ message: "OK" }));
 
 // FASKES PROFILE
-routes.get(`/${apiBase}/${apiVersion}/faskes-profile`, FaskesProfileController.findByFaskesUuid);
-routes.put(`/${apiBase}/${apiVersion}/faskes-profile`, FaskesProfileController.update);
+routes.get(`/${apiBase}/${apiVersion}/setting/faskes-profile`, FaskesProfileController.findByFaskesUuid);
+routes.put(`/${apiBase}/${apiVersion}/setting/faskes-profile`, FaskesProfileController.update);
 
 // INTERGRATION
-routes.get(`/${apiBase}/${apiVersion}/integration`, IntegrationController.findByUuid);
-routes.put(`/${apiBase}/${apiVersion}/integration/vclaim`, IntegrationController.updateVclaim);
-routes.put(`/${apiBase}/${apiVersion}/integration/other`, IntegrationController.updateOther);
+routes.get(`/${apiBase}/${apiVersion}/setting/integration`, IntegrationController.findByUuid);
+routes.put(`/${apiBase}/${apiVersion}/setting/integration/vclaim`, IntegrationController.updateVclaim);
+routes.put(`/${apiBase}/${apiVersion}/setting/integration/other`, IntegrationController.updateOther);
 
 // PROFILE
-routes.get(`/${apiBase}/${apiVersion}/profile`, ProfileController.getProfile);
-routes.put(`/${apiBase}/${apiVersion}/profile`, ProfileController.updateProfile);
+routes.get(`/${apiBase}/${apiVersion}/setting/profile`, ProfileController.getProfile);
+routes.put(`/${apiBase}/${apiVersion}/setting/profile`, ProfileController.updateProfile);
 
 // PRINTER
-routes.get(`/${apiBase}/${apiVersion}/printer`, PrinterController.findByUuid);
-routes.put(`/${apiBase}/${apiVersion}/printer`, PrinterController.update);
+routes.get(`/${apiBase}/${apiVersion}/setting/printer`, PrinterController.findByUuid);
+routes.put(`/${apiBase}/${apiVersion}/setting/printer`, PrinterController.update);
 
 export default routes;

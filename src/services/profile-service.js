@@ -13,6 +13,18 @@ export default class ProfileService {
             throw new NotfoundException("profile tidak ditemukan");
         }
 
+        profile.role = {
+            role_uuid: profile.role_uuid,
+            name: profile.role_name
+        }
+        delete profile.role_uuid;
+        delete profile.role_name;
+
+        profile.inventory_medis = profile.iventory_medis
+        profile.inventory_non_medis = profile.iventory_non_medis
+        delete profile.iventory_medis;
+        delete profile.iventory_non_medis;
+
         return profile;
     }
 
@@ -20,29 +32,26 @@ export default class ProfileService {
         let validData = ZodValidator.validate(ProfileValidation.UPDATE, req);
         validData.updatedAt = toEpochDate(new Date());
 
-        if ((req.old_pass && req.new_pass && req.validation_pass) || (!req.old_pass && !req.new_pass && !req.validation_pass)){
+        if ((req.old_password && req.password) || (!req.old_password && !req.password )){
             const user = await ProfileRepository.getByUuid(validData.uuid);
             if (!user) {
                 throw new NotfoundException("profile tidak ditemukan");
             }
-            if(req.old_pass && req.new_pass && req.validation_pass){
-                bcrypt.compare(req.old_pass, user.password, (err, result) => {
+            if(req.old_password && req.password){
+                bcrypt.compare(req.old_password, user.password, (err, result) => {
                     if(err){
                         throw new BadRequestException("password lama tidak sesuai");
                     }
                 });
 
-                if(req.new_pass === req.old_pass){
+                if(req.password === req.old_password){
                     throw new BadRequestException("password baru tidak boleh sama dengan password lama");
                 }
 
-                if(req.new_pass !== req.validation_pass){
-                    throw new BadRequestException("password validasi tidak sama");
-                }
-                validData.password = await bcrypt.hash(req.new_pass, 10);
+                validData.password = await bcrypt.hash(req.password, 10);
             }
         } else {
-            throw new BadRequestException("password lama, password baru, dan validasi password harus diisi semua");
+            throw new BadRequestException("password lama dan password baru harus diisi semua");
         }
 
         const affectedRow = await ProfileRepository.update(validData);
