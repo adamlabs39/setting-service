@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import routes from "./routes/routes.js";
 import errorMiddleware from "./middlewares/error-middleware.js";
 import MODELMERGE from "./models/model-synchronize.js";
@@ -10,6 +11,11 @@ const APPLICATION_PORT = process.env.APPLICATION_PORT;
 const APPLICATION_HOST = process.env.APPLICATION_HOST;
 
 const app = express();
+app.use(cors({
+    origin: '*',
+    allowedHeaders: ['Origin', 'Content-Type', 'Accept', 'User-Agent', 'Content-Length', 'Authorization'],
+    methods: ['GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(authorizationMiddleware)
