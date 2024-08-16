@@ -38,11 +38,11 @@ export default class ProfileService {
                 throw new NotfoundException("profile tidak ditemukan");
             }
             if(req.old_password && req.password){
-                bcrypt.compare(req.old_password, user.password, (err, result) => {
-                    if(err){
-                        throw new BadRequestException("password lama tidak sesuai");
-                    }
-                });
+                const isPasswordValid =  await bcrypt.compare(req.old_password, user.password);
+
+                if (!isPasswordValid) {
+                    throw new BadRequestException("password lama salah");
+                }
 
                 if(req.password === req.old_password){
                     throw new BadRequestException("password baru tidak boleh sama dengan password lama");
