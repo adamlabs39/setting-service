@@ -20,7 +20,7 @@ export default class ProfileRepository {
                         }
                     ]
                 },
-                attributes: ["uuid", "username", "name", "email", 'password' , "photo", "role_uuid", 'phone', 'iventory_medis', 'iventory_non_medis'],
+                attributes: ["uuid", "username", "name", "email", 'password' , "photo", "role_uuid", 'phone', 'inventory_medis', 'inventory_non_medis'],
                 transaction: tr
             });
 

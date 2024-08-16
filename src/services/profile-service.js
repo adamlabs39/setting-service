@@ -20,11 +20,6 @@ export default class ProfileService {
         delete profile.role_uuid;
         delete profile.role_name;
 
-        profile.inventory_medis = profile.iventory_medis
-        profile.inventory_non_medis = profile.iventory_non_medis
-        delete profile.iventory_medis;
-        delete profile.iventory_non_medis;
-
         return profile;
     }
 
