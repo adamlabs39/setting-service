@@ -14,13 +14,13 @@ const routes = express.Router();
 routes.get(`/${apiBase}/${apiVersion}/setting/health`, (req, res) => res.status(200).json({ message: "OK" }));
 
 // FASKES PROFILE
-routes.get(`/${apiBase}/${apiVersion}/setting/profil_faskes`, FaskesProfileController.findByFaskesUuid);
-routes.put(`/${apiBase}/${apiVersion}/setting/profil_faskes`, FaskesProfileController.update);
+routes.get(`/${apiBase}/${apiVersion}/setting/profil-faskes`, FaskesProfileController.findByFaskesUuid);
+routes.put(`/${apiBase}/${apiVersion}/setting/profil-faskes`, FaskesProfileController.update);
 
 // INTERGRATION
 routes.get(`/${apiBase}/${apiVersion}/setting/integrasi`, IntegrationController.findByUuid);
-routes.put(`/${apiBase}/${apiVersion}/setting/integrasi_vclaim`, IntegrationController.updateVclaim);
-routes.put(`/${apiBase}/${apiVersion}/setting/integrasi_other`, IntegrationController.updateOther);
+routes.put(`/${apiBase}/${apiVersion}/setting/integrasi-vclaim`, IntegrationController.updateVclaim);
+routes.put(`/${apiBase}/${apiVersion}/setting/integrasi-other`, IntegrationController.updateOther);
 
 // PROFILE
 routes.get(`/${apiBase}/${apiVersion}/setting/profile`, ProfileController.getProfile);
