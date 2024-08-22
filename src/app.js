@@ -16,8 +16,8 @@ app.use(cors({
     allowedHeaders: ['Origin', 'Content-Type', 'Accept', 'User-Agent', 'Content-Length', 'Authorization'],
     methods: ['GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "25 mb" }));
+app.use(express.urlencoded({ extended: false, limit: "25 mb"  }));
 app.use(authorizationMiddleware)
 app.use(routes);
 app.use(errorMiddleware);
