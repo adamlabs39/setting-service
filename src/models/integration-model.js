@@ -71,6 +71,23 @@ IntegrationModel.init(
             type: DataTypes.BOOLEAN,
             allowNull: true,
         },
+        statusSatuSehat: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+        },
+        clientSecret: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+        organizationId: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+        clientId: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
         ...fieldTime,
     },
     {

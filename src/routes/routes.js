@@ -21,6 +21,7 @@ routes.put(`/${apiBase}/${apiVersion}/setting/profil-faskes`, FaskesProfileContr
 routes.get(`/${apiBase}/${apiVersion}/setting/integrasi`, IntegrationController.findByUuid);
 routes.put(`/${apiBase}/${apiVersion}/setting/integrasi-vclaim`, IntegrationController.updateVclaim);
 routes.put(`/${apiBase}/${apiVersion}/setting/integrasi-other`, IntegrationController.updateOther);
+routes.put(`/${apiBase}/${apiVersion}/setting/integrasi-satu-sehat`, IntegrationController.updateSatuSehat);
 
 // PROFILE
 routes.get(`/${apiBase}/${apiVersion}/setting/profile`, ProfileController.getProfile);

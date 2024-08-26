@@ -34,4 +34,12 @@ export default class IntegrationService {
         if(affectedRow === 0) throw new NotfoundException('gagal mengupdate integrasi, data tidak ditemukan');
         return { message: `berhasil mengupdate ${affectedRow} integrasi` };
     }
+
+    static async updateSatuSehat(req) {
+        const validData = ZodValidator.validate(IntegrationValidation.UPDATESATUSEHAT, req);
+        validData.updatedAt = toEpochDate(new Date());
+        const affectedRow = await IntegrationRepository.update(validData);
+        if(affectedRow === 0) throw new NotfoundException('gagal mengupdate integrasi, data tidak ditemukan');
+        return { message: `berhasil mengupdate ${affectedRow} integrasi` };
+    }
 }

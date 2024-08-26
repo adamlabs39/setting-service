@@ -24,4 +24,12 @@ export default class IntegrationValidation {
             response: z.string(),
         }
     );
+
+    static UPDATESATUSEHAT = z.object({
+        uuid: z.string().min(1, uuidRequired),
+        client_secret: z.string(),
+        organization_id: z.string(),
+        client_id : z.string(),
+        status_satu_sehat: z.boolean()
+    })
 }

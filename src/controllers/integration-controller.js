@@ -32,4 +32,15 @@ export default class IntegrationController {
             nextFunction(error);
         }
     }
+
+    static async updateSatuSehat(request, response, nextFunction) {
+        try {
+            request.body.uuid = response.locals.jwtData.faskesUuid;
+            const result = await IntegrationService.updateSatuSehat(request.body);
+            response.status(200).json(result);
+            response.status(200).json(SuccessResponse("data berhasil diupdate", result));
+        } catch (error) {
+            nextFunction(error);
+        }
+    }
 }
