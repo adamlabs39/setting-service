@@ -29,7 +29,6 @@ export default class FaskesProfileService {
         }
 
         const address = await AddressRepository.getOrCreateBy({uuid: profile.dataValues.addressUuid, faskesUuid: uuid});
-
         return {
             ...Utils.camelToSnakeObject(profile.dataValues),
             address: {
@@ -38,8 +37,8 @@ export default class FaskesProfileService {
                 city: address[0].dataValues.city,
                 district: address[0].dataValues.district,
                 village: address[0].dataValues.village,
-                postal_code: address[0].dataValues.postalCode,
-                full_address : address[0].dataValues.fullAddress
+                postal_code: address[0].dataValues.postal_code ?? address[0].dataValues.postalCode,
+                full_address : address[0].dataValues. full_address ?? address[0].dataValues.fullAddress
             }
         };
     }
@@ -56,6 +55,7 @@ export default class FaskesProfileService {
             postal_code: validData.postalCode,
             full_address: validData.fullAddress
         };
+        validData.address = Utils.snakeToCamelObject(validData.address);
         const affectedRow = await FaskesProfileRepository.update(validData);
         if (affectedRow === 0) throw new NotfoundException('gagal mengupdate faskes profile, data tidak ditemukan');
         return {message: `berhasil mengupdate ${affectedRow} faskes profile`};
