@@ -53,7 +53,7 @@ FaskesProfilesModel.init(
             allowNull: false,
         },
         logo: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.TEXT,
             allowNull: true,
         },
         bgWarna: {
