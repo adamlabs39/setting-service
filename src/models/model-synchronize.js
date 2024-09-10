@@ -6,8 +6,7 @@ import OtoritationPasswordsModel from "./otoritation-passwords-model.js";
 import PermissionModel from "./permission-model.js";
 import FaskesProfilesModel from "./faskes-profiles-model.js";
 import FaskesModel from "./faskes-model.js";
-// import UserModel from "./user-model.js";
-// import RoleModel from "./role-model.js";
+import PpnModel from "./ppn-model.js";
 
 const MODELMERGE = [
     AddressModel,
@@ -17,8 +16,7 @@ const MODELMERGE = [
     IntegrationModel,
     PrinterModel,
     FaskesModel,
-    // UserModel,
-    // RoleModel
+    PpnModel
 ];
 
 export default MODELMERGE;

@@ -16,7 +16,7 @@ PermissionModel.init(
             type: DataTypes.STRING(255),
             primaryKey: true,
             allowNull: false,
-            defaultValue: uuidv7(),
+            defaultValue: () => uuidv7(),
             unique: true,
         },
         faskesUuid: {

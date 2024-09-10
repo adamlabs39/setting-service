@@ -18,7 +18,7 @@ UserModel.init(
             type: DataTypes.STRING(255),
             allowNull: false,
             unique: true,
-            defaultValue: uuidv7()
+            defaultValue: () => uuidv7()
         },
         faskesUuid: {
             type: DataTypes.STRING(255),

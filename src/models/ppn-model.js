@@ -3,8 +3,8 @@ import sequelizeInstance from "../configurations/sequelize-instance.js";
 import { uuidv7 } from "uuidv7";
 import fieldTime from "./base-model.js";
 
-export default class PrinterModel extends Model {}
-PrinterModel.init(
+export default class PpnModel extends Model {}
+PpnModel.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -23,23 +23,20 @@ PrinterModel.init(
             type: DataTypes.STRING(255),
             allowNull: false,
         },
-        header: {
-            type: DataTypes.TEXT,
-            allowNull: true,
+        value: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
         },
-        background: {
-            type: DataTypes.TEXT,
-            allowNull: true,
-        },
-        footer: {
-            type: DataTypes.TEXT,
-            allowNull: true,
+        status: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
         },
         ...fieldTime,
     },
     {
         sequelize: sequelizeInstance,
-        tableName: "printers",
+        tableName: "permissions",
         underscored: true,
         timestamps: false,
     }
