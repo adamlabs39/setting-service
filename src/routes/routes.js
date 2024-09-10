@@ -3,6 +3,7 @@ import FaskesProfileController from "../controllers/faskes-profile-controller.js
 import IntegrationController from "../controllers/integration-controller.js";
 import ProfileController from "../controllers/profile-controller.js";
 import PrinterController from "../controllers/printer-controller.js";
+import PpnController from "../controllers/ppn-controller.js";
 
 const apiBase = process.env.API_BASE || "api";
 const apiVersion = process.env.API_VERSION || "v1";
@@ -30,5 +31,9 @@ routes.put(`/${apiBase}/${apiVersion}/setting/profile`, ProfileController.update
 // PRINTER
 routes.get(`/${apiBase}/${apiVersion}/setting/printer`, PrinterController.findByUuid);
 routes.put(`/${apiBase}/${apiVersion}/setting/printer`, PrinterController.update);
+
+// PPN
+routes.get(`/${apiBase}/${apiVersion}/setting/ppn`, PpnController.findByUuid);
+routes.put(`/${apiBase}/${apiVersion}/setting/ppn`, PpnController.update);
 
 export default routes;

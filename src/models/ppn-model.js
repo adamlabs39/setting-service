@@ -26,6 +26,7 @@ PpnModel.init(
         value: {
             type: DataTypes.FLOAT,
             allowNull: false,
+            defaultValue: 0,
         },
         status: {
             type: DataTypes.BOOLEAN,
