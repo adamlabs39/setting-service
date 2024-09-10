@@ -22,6 +22,7 @@ export default class IntegrationValidation {
             header: z.string(),
             request: z.string(),
             response: z.string(),
+            statusLainnya : z.boolean()
         }
     );
 

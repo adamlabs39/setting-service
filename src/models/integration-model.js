@@ -76,6 +76,11 @@ IntegrationModel.init(
             allowNull: true,
             defaultValue: false,
         },
+        statusLainnya : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+        },
         clientSecret: {
             type: DataTypes.TEXT,
             allowNull: true,
