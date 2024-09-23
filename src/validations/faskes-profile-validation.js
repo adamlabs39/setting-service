@@ -2,7 +2,6 @@ import {z} from 'zod';
 import {
     addressUuidRequired,
     codeRequired, emailRequired,
-    faskesUuidRequired,
     nameRequired, phoneRequired, urlGmapsRequired,
     uuidRequired, websiteRequired
 } from "./message-validation-error.js";
@@ -26,4 +25,14 @@ export default class FaskesProfileValidation {
         logo: z.string(),
         bgWarna: z.string(),
     });
+
+    static UPDATE_PPN = z.object({
+        uuid: z.string().min(1, uuidRequired),
+        statusPpn: z.boolean(),
+    })
+
+    static UPDATE_BIAYA_ADMINISTRASI = z.object({
+        uuid: z.string().min(1, uuidRequired),
+        statusBiayaLain: z.boolean(),
+    })
 }

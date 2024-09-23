@@ -3,13 +3,13 @@ import FaskesProfileController from "../controllers/faskes-profile-controller.js
 import IntegrationController from "../controllers/integration-controller.js";
 import ProfileController from "../controllers/profile-controller.js";
 import PrinterController from "../controllers/printer-controller.js";
-import PpnController from "../controllers/ppn-controller.js";
+import authorizationMiddleware from "../middlewares/authorization-middleware.js";
 
 const apiBase = process.env.API_BASE || "api";
 const apiVersion = process.env.API_VERSION || "v1";
 
 const routes = express.Router();
-// routes.use(authorizationMiddleware);
+routes.use(authorizationMiddleware);
 
 // HEALTH CHECK
 routes.get(`/${apiBase}/${apiVersion}/setting/health`, (req, res) => res.status(200).json({ message: "OK" }));
@@ -17,6 +17,10 @@ routes.get(`/${apiBase}/${apiVersion}/setting/health`, (req, res) => res.status(
 // FASKES PROFILE
 routes.get(`/${apiBase}/${apiVersion}/setting/profil-faskes`, FaskesProfileController.findByFaskesUuid);
 routes.put(`/${apiBase}/${apiVersion}/setting/profil-faskes`, FaskesProfileController.update);
+routes.put(`/${apiBase}/${apiVersion}/setting/ppn`, FaskesProfileController.updatePPN);
+routes.get(`/${apiBase}/${apiVersion}/setting/ppn`, FaskesProfileController.findPPN);
+routes.put(`/${apiBase}/${apiVersion}/setting/biaya-administrasi`, FaskesProfileController.updateBiayaAdministrasi);
+routes.get(`/${apiBase}/${apiVersion}/setting/biaya-administrasi`, FaskesProfileController.findBiayaAdministrasi);
 
 // INTERGRATION
 routes.get(`/${apiBase}/${apiVersion}/setting/integrasi`, IntegrationController.findByUuid);
@@ -31,9 +35,5 @@ routes.put(`/${apiBase}/${apiVersion}/setting/profile`, ProfileController.update
 // PRINTER
 routes.get(`/${apiBase}/${apiVersion}/setting/printer`, PrinterController.findByUuid);
 routes.put(`/${apiBase}/${apiVersion}/setting/printer`, PrinterController.update);
-
-// PPN
-routes.get(`/${apiBase}/${apiVersion}/setting/ppn`, PpnController.findByUuid);
-routes.put(`/${apiBase}/${apiVersion}/setting/ppn`, PpnController.update);
 
 export default routes;

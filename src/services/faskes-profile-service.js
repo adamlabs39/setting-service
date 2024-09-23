@@ -7,6 +7,7 @@ import FaskesRepository from "../repositories/faskes-repository.js";
 import {uuidv7} from "uuidv7";
 import AddressRepository from "../repositories/address-repository.js";
 import Utils from "../helpers/utils.js";
+import BadRequestException from "../errors/bad-request-exception.js";
 
 export default class FaskesProfileService {
     static async findByFaskesUuid(uuid) {
@@ -59,5 +60,57 @@ export default class FaskesProfileService {
         const affectedRow = await FaskesProfileRepository.update(validData);
         if (affectedRow === 0) throw new NotfoundException('gagal mengupdate faskes profile, data tidak ditemukan');
         return {message: `berhasil mengupdate ${affectedRow} faskes profile`};
+    }
+
+    static async updatePPN(req) {
+        const validData = ZodValidator.validate(FaskesProfileValidation.UPDATE_PPN, Utils.snakeToCamelObject(req));
+        if (validData.statusPpn === false) {
+            validData.valuePpn = 0;
+        } else {
+            if (req.value_ppn === undefined) {
+                throw new BadRequestException('value ppn tidak boleh kosong');
+            } else {
+                validData.valuePpn = req.value_ppn;
+            }
+        }
+        validData.updatedAt = toEpochDate(new Date());
+        const affectedRow = await FaskesProfileRepository.update(validData);
+        if (affectedRow === 0) throw new NotfoundException('gagal mengupdate ppn, data tidak ditemukan');
+        return {message: `berhasil mengupdate ppn`};
+    }
+
+    static async updateBiayaAdministrasi(req) {
+        const validData = ZodValidator.validate(FaskesProfileValidation.UPDATE_BIAYA_ADMINISTRASI, Utils.snakeToCamelObject(req));
+        if (validData.statusBiayaLain === false) {
+            validData.valueBiayaLain = 0;
+        } else {
+            if (req.value_biaya_lain === undefined) {
+                throw new BadRequestException('value biaya lain tidak boleh kosong');
+            } else {
+                validData.valueBiayaLain = req.value_biaya_lain;
+            }
+        }
+        validData.updatedAt = toEpochDate(new Date());
+        const affectedRow = await FaskesProfileRepository.update(validData);
+        if (affectedRow === 0) throw new NotfoundException('gagal mengupdate biaya lain, data tidak ditemukan');
+        return {message: `berhasil mengupdate biaya lain`};
+    }
+
+    static async findPPN(uuid) {
+        const faskes = await FaskesRepository.findByUuid(uuid);
+        if(faskes === null) throw new NotfoundException('faskes tidak ditemukan');
+
+        let data = await FaskesProfileRepository.findPPN(uuid);
+
+        return Utils.camelToSnakeObject(data.dataValues);
+    }
+
+    static async findBiayaAdministrasi(uuid) {
+        const faskes = await FaskesRepository.findByUuid(uuid);
+        if(faskes === null) throw new NotfoundException('faskes tidak ditemukan');
+
+        let data = await FaskesProfileRepository.findBiayaAdministrasi(uuid);
+
+        return Utils.camelToSnakeObject(data.dataValues);
     }
 }

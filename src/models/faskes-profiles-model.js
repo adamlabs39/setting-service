@@ -60,6 +60,26 @@ FaskesProfilesModel.init(
             type: DataTypes.STRING(255),
             allowNull: true,
         },
+        valuePpn: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            defaultValue: 0,
+        },
+        statusPpn: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+        statusBiayaLain: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+        valueBiayaLain: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            defaultValue: 0,
+        },
         ...fieldTime,
     },
     {

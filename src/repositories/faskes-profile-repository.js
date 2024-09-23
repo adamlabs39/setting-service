@@ -43,12 +43,16 @@ export default class FaskesProfileRepository {
 
             if (affectedRow[0] === 0) throw new NotfoundException('gagal mengupdate faskes profile, data tidak ditemukan');
 
-            affectedRow = await AddressModel.update(req.address, {
-                where: {
-                    uuid: req.address.uuid
-                },
-                transaction: tr,
-            });
+            if (req.address !== null && req.address !== undefined){
+                {
+                    affectedRow = await AddressModel.update(req.address, {
+                        where: {
+                            uuid: req.address.uuid
+                        },
+                        transaction: tr,
+                    });
+                }
+            }
 
             if (affectedRow[0] === 0) throw new InternalServerException('gagal mengupdate faskes profile, data address tidak ditemukan');
 
@@ -56,5 +60,41 @@ export default class FaskesProfileRepository {
         });
     }
 
+    static async findPPN(uuid) {
+        return await sequelizeInstance.transaction(async (tr) => {
+            return await FaskesProfilesModel.findOne({
+                where: {
+                    [Op.and]: [
+                        {faskesUuid: uuid},
+                        {
+                            deletedAt: {
+                                [Op.is]: null
+                            }
+                        }
+                    ]
+                },
+                attributes: ['status_ppn', 'value_ppn'],
+                transaction: tr
+            });
+        });
+    }
 
+    static async findBiayaAdministrasi(uuid) {
+        return await sequelizeInstance.transaction(async (tr) => {
+            return await FaskesProfilesModel.findOne({
+                where: {
+                    [Op.and]: [
+                        {faskesUuid: uuid},
+                        {
+                            deletedAt: {
+                                [Op.is]: null
+                            }
+                        }
+                    ]
+                },
+                attributes: ['status_biaya_lain', 'value_biaya_lain'],
+                transaction: tr
+            });
+        });
+    }
 }
