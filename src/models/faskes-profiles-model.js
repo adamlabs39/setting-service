@@ -80,6 +80,12 @@ FaskesProfilesModel.init(
             allowNull: false,
             defaultValue: 0,
         },
+        codeProvinsi : {
+            type: DataTypes.STRING(50),
+        },
+        codeKabupaten : {
+            type: DataTypes.STRING(50),
+        },
         ...fieldTime,
     },
     {

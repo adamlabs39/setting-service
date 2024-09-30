@@ -1,6 +1,5 @@
 import SuccessResponse from "../responses/success-response.js";
 import PrinterService from "../services/printer-service.js";
-import FaskesProfileService from "../services/faskes-profile-service.js";
 
 export default class PrinterController {
     static async findByUuid(request, response, nextFunction) {
