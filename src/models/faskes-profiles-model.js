@@ -86,6 +86,15 @@ FaskesProfilesModel.init(
         codeKabupaten : {
             type: DataTypes.STRING(50),
         },
+        lat : {
+            type: DataTypes.STRING(50),
+        },
+        long : {
+            type: DataTypes.STRING(50),
+        },
+        cover: {
+            type: DataTypes.TEXT,
+        },
         ...fieldTime,
     },
     {
