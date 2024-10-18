@@ -2,3 +2,5 @@
 node_modules
 .idea
 public.key
+docker-compose-dev.yml
+redis.conf
