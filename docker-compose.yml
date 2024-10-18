@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: adameds-setting
     ports:
-      - ${APPLICATION_PORT}:${APPLICATION_PORT}
+      - 8082:8082
     restart: always
     networks:
       - adameds-network
