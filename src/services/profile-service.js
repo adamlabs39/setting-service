@@ -26,6 +26,8 @@ export default class ProfileService {
     static async update(req){
         let validData = ZodValidator.validate(ProfileValidation.UPDATE, req);
         validData.updatedAt = toEpochDate(new Date());
+        req.awal_gelar = req.awalan_gelar;
+        req.akhir_gelar = req.akhiran_gelar;
 
         if ((req.old_password && req.password) || (!req.old_password && !req.password )){
             const user = await ProfileRepository.getByUuid(validData.uuid);

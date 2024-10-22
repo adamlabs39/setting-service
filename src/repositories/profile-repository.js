@@ -1,10 +1,9 @@
 import sequelizeInstance from "../configurations/sequelize-instance.js";
-import UserModel from "../models/user-model.js";
 
 import {Op} from "sequelize";
-import RoleModel from "../models/role-model.js";
 import RoleRepository from "./role-repository.js";
 import NotfoundException from "../errors/notfound-exception.js";
+import {UserModel} from "@adameds/model-sdk/datamaster";
 
 export default class ProfileRepository {
     static async getByUuid(uuid) {
@@ -20,7 +19,7 @@ export default class ProfileRepository {
                         }
                     ]
                 },
-                attributes: ["uuid", "username", "name", "email", 'password' , "photo", "role_uuid", 'phone', 'inventory_medis', 'inventory_non_medis', 'awalan_gelar', 'akhiran_gelar'],
+                attributes: ["uuid", "username", "name", "email", 'password' , "photo", "role_uuid", 'phone', 'inventory_medis', 'inventory_non_medis', 'awal_gelar', 'akhir_gelar'],
                 transaction: tr
             });
 

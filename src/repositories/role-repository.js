@@ -1,5 +1,5 @@
 import sequelizeInstance from "../configurations/sequelize-instance.js";
-import RoleModel from "../models/role-model.js";
+import {RoleModel} from "@adameds/model-sdk/datamaster";
 
 export default class RoleRepository {
     static async findByUuid(uuid) {
