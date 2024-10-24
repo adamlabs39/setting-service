@@ -7,10 +7,7 @@ build-image:
   before_script:
     - docker compose down --rmi all
     - echo "@adameds:registry=https://gitlab.com/api/v4/groups/93029767/-/packages/npm/" >> .npmrc
-    - echo "//gitlab.com/api/v4/groups/93029767/-/packages/npm/:_authToken=$AUTH_TOKEN" >> .npmrc
-    - cat .npmrc
-    - echo "$AUTH_TOKEN"
-    
+    - echo "//gitlab.com/api/v4/groups/93029767/-/packages/npm/:_authToken=${AUTH_TOKEN}" >> .npmrc
   script:
     - docker build -t adameds-setting-service:dev ./ --no-cache
   only:
