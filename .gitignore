@@ -4,3 +4,4 @@ node_modules
 public.key
 docker-compose-dev.yml
 redis.conf
+.npmrc

@@ -1,6 +1,6 @@
-import IntegrationModel from "../models/integration-model.js";
 import {Op} from "sequelize";
 import sequelizeInstance from "../configurations/sequelize-instance.js";
+import {IntegrationModel} from "@adameds/model-sdk/setting";
 
 export default class IntegrationRepository {
     static async findByFaskesUuid(uuid) {

@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import UserModel from "../models/user-model.js";
+import {UserModel} from "@adameds/model-sdk/datamaster";
 
 export default class AuthenticationRepository {
   static async isTokenExist(username){

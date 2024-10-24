@@ -1,5 +1,5 @@
 import sequelizeInstance from "../configurations/sequelize-instance.js";
-import AddressModel from "../models/address-model.js";
+import {AddressModel} from "@adameds/model-sdk/setting";
 
 export default class AddressRepository {
     static async getOrCreateBy(req) {

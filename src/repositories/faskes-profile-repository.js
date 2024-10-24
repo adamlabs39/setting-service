@@ -1,9 +1,8 @@
 import sequelizeInstance from "../configurations/sequelize-instance.js";
-import FaskesProfilesModel from "../models/faskes-profiles-model.js";
 import {Op} from "sequelize";
-import AddressModel from "../models/address-model.js";
 import NotfoundException from "../errors/notfound-exception.js";
 import InternalServerException from "../errors/internal-server-exception.js";
+import {AddressModel, FaskesProfilesModel} from "@adameds/model-sdk/setting";
 
 export default class FaskesProfileRepository {
     static async getByFaskesUuid(uuid){

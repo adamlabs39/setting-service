@@ -1,6 +1,6 @@
 import sequelizeInstance from "../configurations/sequelize-instance.js";
-import PrinterModel from "../models/printer-model.js";
 import {Op} from "sequelize";
+import {PrinterModel} from "@adameds/model-sdk/setting";
 
 export default class PrinterRepository {
     static async findByFaskesUuid(uuid) {

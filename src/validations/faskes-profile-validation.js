@@ -26,6 +26,9 @@ export default class FaskesProfileValidation {
         bgWarna: z.string(),
         codeKabupaten: z.string(),
         codeProvinsi: z.string(),
+        lat : z.string(),
+        long : z.string(),
+        cover: z.string(),
     });
 
     static UPDATE_PPN = z.object({
