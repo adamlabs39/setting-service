@@ -2,7 +2,7 @@ version: "3.3"
 services:
   adaneds-setting:
     container_name: adameds-setting-dev
-    image: adameds-setting-service:dev
+    image: adameds/setting-service:dev
     ports:
       - 8082:8082
     restart: always
