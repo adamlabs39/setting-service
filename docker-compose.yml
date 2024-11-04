@@ -19,6 +19,13 @@ services:
       # API CONFIG
       API_BASE: "api"
       API_VERSION: "v3"
+    volumes:
+      - type: bind
+        source: /home/admin/adameds/public.key
+        target: /adameds-setting/public.key
+      - type: bind
+        source: /home/admin/adameds/private.key
+        target: /adameds-setting/private.key
 networks:
   adameds-network:
     driver: bridge
