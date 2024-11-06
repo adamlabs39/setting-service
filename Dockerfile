@@ -1,7 +1,13 @@
-FROM node:16-alpine
+FROM node:19.5.0-alpine
 
 WORKDIR /adameds-setting
 COPY package.json .
-RUN npm install
+
+# Application config
+ENV APPLICATION_PORT=8082
+ENV APPLICATION_HOST=0.0.0.0
+
 COPY . .
-CMD npm start
+RUN npm install
+EXPOSE $APPLICATION_PORT/TCP
+CMD ["npm", "run", "start"]
