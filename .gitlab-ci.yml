@@ -5,10 +5,9 @@ stages:
 build-image:
   stage: build
   before_script:
-    - docker compose down --rmi all
+    - docker compose --env-file /home/admin/adameds/.env-adameds-setting down --rmi all
     - echo "@adameds:registry=https://gitlab.com/api/v4/groups/93029767/-/packages/npm/" >> .npmrc
     - echo "//gitlab.com/api/v4/groups/93029767/-/packages/npm/:_authToken=$AUTH_TOKEN" >> .npmrc
-    - cat .npmrc
   script:
     - docker build -t adameds/setting-service:dev ./ --no-cache
   only:
@@ -17,6 +16,6 @@ build-image:
 deploy-app:
   stage: deploy
   script:
-    - docker compose --env-file /home/admin/adameds/.env-setting up -d
+    - docker compose --env-file /home/admin/adameds/.env-adameds-setting up -d
   only:
     - dev-deployment
