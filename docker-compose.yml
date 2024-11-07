@@ -16,6 +16,13 @@ services:
       DB_DIALECT: ${DB_DIALECT}
       BASE_URL: ${BASE_URL}
 
+      # Redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_USERNAME: ${REDIS_USERNAME}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_DATABASE: ${REDIS_DATABASE}
+
       # API CONFIG
       API_BASE: "api"
       API_VERSION: "v3"

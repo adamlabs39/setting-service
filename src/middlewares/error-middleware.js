@@ -11,7 +11,7 @@ const errorMiddleware = (error, request, response, nextFunction) => {
         response.status(error.status).json(errorResponse(error.message));
     } else if (error instanceof InternalServerException) {
         response.status(error.code).json(errorResponse(error.message));
-    }else if (error instanceof AuthorizationSdkException) {
+    } else if (error instanceof AuthorizationSdkException) {
         response.status(error.code).json(error.message);
     }
     response.status(500).json(errorResponse(error.message));
