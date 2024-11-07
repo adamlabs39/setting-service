@@ -14,7 +14,6 @@ const errorMiddleware = (error, request, response, nextFunction) => {
     } else if (error instanceof AuthorizationSdkException) {
         response.status(error.code).json(error.message);
     }
-
     response.status(500).json(errorResponse(error.message));
 };
 
