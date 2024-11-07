@@ -1,22 +1,31 @@
-version: '3.3'
+version: "3.3"
 services:
-  app:
-    build: .
-    container_name: adameds-setting
+  adaneds-setting:
+    container_name: adameds-setting-dev
+    image: adameds/setting-service:dev
     ports:
-      - ${APPLICATION_PORT}:${APPLICATION_PORT}
+      - 8082:8082
     restart: always
     networks:
-        - adameds-network
+      - adameds-network
     environment:
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_DIALECT=${DB_DIALECT}
-      - DB_NAME=${DB_NAME}
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - APPLICATION_PORT=${APPLICATION_PORT}
-      - APPLICATION_HOST=${APPLICATION_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DIALECT: ${DB_DIALECT}
+      BASE_URL: ${BASE_URL}
+
+      # API CONFIG
+      API_BASE: "api"
+      API_VERSION: "v3"
+    volumes:
+      - type: bind
+        source: /home/admin/adameds/public.key
+        target: /adameds-setting/public.key
+      - type: bind
+        source: /home/admin/adameds/private.key
+        target: /adameds-setting/private.key
 networks:
-    adameds-network:
-        driver: bridge
+  adameds-network:
+    driver: bridge
