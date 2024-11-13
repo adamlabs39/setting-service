@@ -1,6 +1,9 @@
-version: "3.3"
 services:
   adaneds-setting:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      no_cache: true
     container_name: adameds-setting-dev
     image: adameds/setting-service:dev
     ports:
@@ -9,20 +12,7 @@ services:
     networks:
       - adameds-network
     environment:
-      DB_NAME: ${DB_NAME}
-      DB_HOST: ${DB_HOST}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DIALECT: ${DB_DIALECT}
-      BASE_URL: ${BASE_URL}
-
-      # Redis
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      REDIS_USERNAME: ${REDIS_USERNAME}
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_DATABASE: ${REDIS_DATABASE}
-
+      DOTENV_KEY: ${DOTENV_KEY}
       # API CONFIG
       API_BASE: "api"
       API_VERSION: "v3"
@@ -33,6 +23,9 @@ services:
       - type: bind
         source: /home/admin/adameds/private.key
         target: /adameds-setting/private.key
+      - type: bind
+        source: /home/admin/adameds/.env.vault
+        target: /adameds-setting/.env.vault
 networks:
   adameds-network:
     driver: bridge
