@@ -113,4 +113,16 @@ export default class FaskesProfileService {
 
         return Utils.camelToSnakeObject(data.dataValues);
     }
+
+    static async findProfileByFaskesUuid(request){
+        ZodValidator.validate(FaskesProfileValidation.GET_PROFILE_FASKES, {faskesUuid: request});
+        const profile = await FaskesProfileRepository.findProfileByUuid(request);
+        if(!profile){
+            throw new NotfoundException("profile faskes tidak ditemukan")
+        }
+        return {
+            message: "Berhasil menmabpilkan profile faskes",
+            payload: profile
+        }
+    }
 }

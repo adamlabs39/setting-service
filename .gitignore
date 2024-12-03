@@ -6,3 +6,4 @@ public.key
 docker-compose-dev.yml
 redis.conf
 .npmrc
+*.key

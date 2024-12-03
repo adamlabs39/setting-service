@@ -40,4 +40,8 @@ export default class FaskesProfileValidation {
         uuid: z.string().min(1, uuidRequired),
         statusBiayaLain: z.boolean(),
     })
+
+    static GET_PROFILE_FASKES = z.object({
+        faskesUuid: z.string().min(1, "faskes_uuid tidak boleh kosong")
+    })
 }

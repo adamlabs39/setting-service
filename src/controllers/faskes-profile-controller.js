@@ -58,4 +58,19 @@ export default class FaskesProfileController {
       nextFunction(error);
     }
   }
+
+  /**
+   * 
+   * @param {Request} request 
+   * @param {Response} response 
+   * @param {NextFunction} nextFunction 
+   */
+  static async findFaskesProfileByFaskesUuid(request, response, nextFunction) {
+    try{ 
+      const result = await FaskesProfileService.findProfileByFaskesUuid(request.params.faskesUuid);
+      response.status(200).json(result);
+    }catch(error){
+      nextFunction(error);
+    }
+  }
 }

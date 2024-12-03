@@ -20,6 +20,7 @@ routes.put(`/${apiBase}/${apiVersion}/setting/ppn`, FaskesProfileController.upda
 routes.get(`/${apiBase}/${apiVersion}/setting/ppn`, FaskesProfileController.findPPN);
 routes.put(`/${apiBase}/${apiVersion}/setting/biaya-administrasi`, FaskesProfileController.updateBiayaAdministrasi);
 routes.get(`/${apiBase}/${apiVersion}/setting/biaya-administrasi`, FaskesProfileController.findBiayaAdministrasi);
+routes.get(`/${apiBase}/${apiVersion}/setting/-/profile-faskes/:faskesUuid`, FaskesProfileController.findFaskesProfileByFaskesUuid);
 
 // INTERGRATION
 routes.get(`/${apiBase}/${apiVersion}/setting/integrasi`, IntegrationController.findByUuid);

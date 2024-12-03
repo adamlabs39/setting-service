@@ -96,4 +96,22 @@ export default class FaskesProfileRepository {
             });
         });
     }
+
+
+    static async findProfileByUuid(uuid) {
+        return await sequelizeInstance.transaction(async tr => {
+            const profile = await FaskesProfilesModel.findOne({
+                where: {
+                    faskesUuid: uuid
+                },
+                transaction: tr
+            });
+            if(!profile) {
+                return null
+            }
+            else {
+                return profile.toJSON();
+            }
+        })
+    }
 }
