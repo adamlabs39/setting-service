@@ -99,18 +99,39 @@ export default class FaskesProfileRepository {
 
 
     static async findProfileByUuid(uuid) {
+        FaskesProfilesModel.hasOne(AddressModel, {
+            constraints: false,
+            foreignKey: "faskesUuid",
+            sourceKey: "uuid"
+        });
+
+        AddressModel.belongsTo(FaskesProfilesModel, {
+            constraints: false,
+            foreignKey: "uuid",
+            targetKey: "faskesUuid"
+        });
         return await sequelizeInstance.transaction(async tr => {
+            
             const profile = await FaskesProfilesModel.findOne({
                 where: {
                     faskesUuid: uuid
                 },
-                transaction: tr
+                transaction: tr,
+                include: [
+                    {
+                        model: AddressModel,
+                        required: true
+                    }
+                ]
             });
             if(!profile) {
                 return null
             }
             else {
-                return profile.toJSON();
+                const p = profile.toJSON();
+                delete p.AddressModel;
+                p.address = profile.toJSON().AddressModel;
+                return p;
             }
         })
     }
