@@ -125,4 +125,13 @@ export default class FaskesProfileService {
             payload: profile
         }
     }
+
+    static async findAllFaskesProfileIncludeAddress(page, pageSize, orderBy, search){
+        const result = await FaskesProfileRepository.findAllProfileFaskesIncludeAddress(page, pageSize, orderBy, search);
+        return {
+            message: "Berhasil menampilkan semua profile faskes",
+            payload: result.data,
+            properties: result.properties
+        }
+    }
 }

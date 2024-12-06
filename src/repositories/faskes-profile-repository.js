@@ -135,4 +135,59 @@ export default class FaskesProfileRepository {
             }
         })
     }
+
+    /**
+     * 
+     * @param {number} page 
+     * @param {number} pageSize 
+     * @param {string} orderBy 
+     * @param {string} search 
+     */
+    static async findAllProfileFaskesIncludeAddress(page, pageSize, orderBy, search){
+        FaskesProfilesModel.hasOne(AddressModel, {
+            constraints: false,
+            foreignKey: "faskesUuid",
+            sourceKey: "uuid"
+        });
+
+        AddressModel.belongsTo(FaskesProfilesModel, {
+            constraints: false,
+            foreignKey: "uuid",
+            targetKey: "faskesUuid"
+        });
+        let whereClause;
+        if(search){
+            whereClause = {
+               name: {
+                [Op.like]: `%${search}%`
+               } 
+            }
+        }
+        const {count, rows} = await FaskesProfilesModel.findAndCountAll({
+            where: whereClause,
+            limit: pageSize,
+            offset: page-1,
+            order: [["id", orderBy]],
+            include: [
+                {
+                    model: AddressModel,
+                    required: true
+                }
+            ]
+        });;
+        return {
+            data: rows.map(profile => {
+                let p = profile.toJSON();
+                delete p.AddressModel;
+                p.address = profile.toJSON().AddressModel;
+                return p;
+            }),
+            properties: {
+                currentPage: page,
+                perPage: pageSize,
+                totalPage: Math.ceil(count / pageSize),
+                totalData: count
+            }
+        }
+    }
 }

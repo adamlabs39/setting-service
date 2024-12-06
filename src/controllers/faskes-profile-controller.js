@@ -73,4 +73,23 @@ export default class FaskesProfileController {
       nextFunction(error);
     }
   }
+
+  /**
+   * 
+   * @param {Request} request 
+   * @param {Response} response 
+   * @param {NextFunction} nextFunction 
+   */
+  static async findAllIncludeAddress(request, response, nextFunction) {
+    try{ 
+      const page = request.query.page === undefined? 1 : request.query.page;
+      const pageSize = request.query.pageSize === undefined? 10 : request.query.pageSize;
+      const orderBy = request.query.orderBy === undefined? "DESC" : request.query.orderBy;
+      const search = request.query.search === undefined ? undefined : request.query.search;
+      const result = await FaskesProfileService.findAllFaskesProfileIncludeAddress(page, pageSize, orderBy, search);
+      response.status(200).json(result);
+    }catch(error){
+      nextFunction(error);
+    }
+  }
 }
