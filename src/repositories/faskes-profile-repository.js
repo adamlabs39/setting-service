@@ -120,7 +120,7 @@ export default class FaskesProfileRepository {
                 include: [
                     {
                         model: AddressModel,
-                        required: true
+                        required: false
                     }
                 ]
             });
