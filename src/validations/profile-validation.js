@@ -6,7 +6,7 @@ export default class ProfileValidation {
         name: z.string().min(1, nameRequired),
         phone: z.string().min(1, phoneRequired),
         photo: z.string(),
-        uuid: z.string().min(1, uuidRequired),
+        username: z.string().min(1, nameRequired),
         awalan_gelar : z.string(),
         akhiran_gelar : z.string(),
     })

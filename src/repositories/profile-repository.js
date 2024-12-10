@@ -3,15 +3,15 @@ import sequelizeInstance from "../configurations/sequelize-instance.js";
 import {Op} from "sequelize";
 import RoleRepository from "./role-repository.js";
 import NotfoundException from "../errors/notfound-exception.js";
-import {UserModel} from "@adameds/model-sdk/datamaster";
+import {PegawaiModel, PractitionerModel, UserModel} from "@adameds/model-sdk/datamaster";
 
 export default class ProfileRepository {
-    static async getByUuid(uuid) {
+    static async getByUsername(username) {
         return await sequelizeInstance.transaction(async (tr) => {
             const user = await UserModel.findOne({
                 where: {
                     [Op.and]: [
-                        {uuid: `${uuid}`},
+                        {username: `${username}`},
                         {
                             deletedAt: {
                                 [Op.is]: null
@@ -19,7 +19,21 @@ export default class ProfileRepository {
                         }
                     ]
                 },
-                attributes: ["uuid", "username", "name", "email", 'password' , "photo", "role_uuid", 'phone', 'inventory_medis', 'inventory_non_medis', 'awal_gelar', 'akhir_gelar'],
+                include: [
+                    {
+                        model: PractitionerModel,
+                        as: "practitioner_user",
+                        attributes: ["uuid"],
+                        include: [
+                            {
+                                model: PegawaiModel,
+                                as: "pegawai_user",
+                                attributes: ["uuid", "name"],
+                            }
+                        ]
+                    }
+                ],
+                attributes: ["uuid", "username", "email", 'password' , "photo", "role_uuid", 'phone'],
                 transaction: tr
             });
 
@@ -31,7 +45,9 @@ export default class ProfileRepository {
 
             return {
                 ...user.dataValues,
-                role_name: role.dataValues.name
+                name : user?.practitioner_user?.pegawai_user?.name,
+                practitioner_user : undefined,
+                role_name: role?.dataValues?.name
             }
         });
 
@@ -40,10 +56,62 @@ export default class ProfileRepository {
     static async update(user){
         return await sequelizeInstance.transaction(async (tr) => {
                 const affectedRow = await UserModel.update(user, {
-                    where: {uuid: user.uuid},
+                    where: {username: user.username},
                     transaction: tr
                 });
+
+                const userPegawai = await UserModel.findOne({
+                    where: {
+                        [Op.and]: [
+                            {username: `${user.username}`},
+                            {
+                                deletedAt: {
+                                    [Op.is]: null
+                                }
+                            }
+                        ]
+                    },
+                    include: [
+                        {
+                            model: PractitionerModel,
+                            as: "practitioner_user",
+                            attributes: ["uuid"],
+                            include: [
+                                {
+                                    model: PegawaiModel,
+                                    as: "pegawai_user",
+                                    attributes: ["uuid"],
+                                }
+                            ]
+                        }
+                    ],
+                    attributes: ["uuid"],
+                    transaction: tr
+                });
+
+                await PegawaiModel.update({
+                    name : user.name,
+                    first_title : user.awalan_gelar,
+                    last_title : user.akhiran_gelar,
+                }, {
+                    where: {uuid: userPegawai.practitioner_user.pegawai_user.uuid},
+                    transaction: tr
+                })
+
                 return affectedRow[0];
         });
     }
+
 }
+
+UserModel.belongsTo(PractitionerModel, {
+    foreignKey: "practitioner_uuid",
+    as: "practitioner_user",
+    constraints: false
+})
+
+PractitionerModel.belongsTo(PegawaiModel, {
+    foreignKey: "pegawai_uuid",
+    as: "pegawai_user",
+    constraints: false
+})
