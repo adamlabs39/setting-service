@@ -5,7 +5,7 @@ import {
     IntegrationModel,
     OtoritationPasswordsModel, PpnModel, PrinterModel
 } from "@adameds/model-sdk/setting";
-import {RoleModel, UserModel} from "@adameds/model-sdk/datamaster";
+import {PegawaiModel, RoleModel, UserModel} from "@adameds/model-sdk/datamaster";
 
 const MODELMERGE = [
     // AddressModel,
@@ -14,7 +14,8 @@ const MODELMERGE = [
     // IntegrationModel,
     // PrinterModel,
     // PpnModel,
-    // UserModel
+    UserModel,
+    PegawaiModel,
     // RoleModel
 ];
 

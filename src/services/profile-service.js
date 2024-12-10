@@ -7,8 +7,8 @@ import bcrypt from "bcrypt";
 import {toEpochDate} from "../helpers/date-helper.js";
 
 export default class ProfileService {
-    static async getProfileByUuid(uuid) {
-        const profile = await ProfileRepository.getByUuid(uuid);
+    static async getProfileByUsername(username) {
+        const profile = await ProfileRepository.getByUsername(username);
         if (!profile) {
             throw new NotfoundException("profile tidak ditemukan");
         }
@@ -26,11 +26,9 @@ export default class ProfileService {
     static async update(req){
         let validData = ZodValidator.validate(ProfileValidation.UPDATE, req);
         validData.updatedAt = toEpochDate(new Date());
-        req.awal_gelar = req.awalan_gelar;
-        req.akhir_gelar = req.akhiran_gelar;
 
         if ((req.old_password && req.password) || (!req.old_password && !req.password )){
-            const user = await ProfileRepository.getByUuid(validData.uuid);
+            const user = await ProfileRepository.getByUsername(validData.username);
             if (!user) {
                 throw new NotfoundException("profile tidak ditemukan");
             }
