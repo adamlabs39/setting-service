@@ -14,15 +14,9 @@ services:
     environment:
       DOTENV_KEY: ${DOTENV_KEY}
       # API CONFIG
-      API_BASE: "api"
-      API_VERSION: "v3"
+      API_BASE: ${API_BASE}
+      API_VERSION: ${API_VERSION}
     volumes:
-      - type: bind
-        source: /home/admin/adameds/public.key
-        target: /adameds-setting/public.key
-      - type: bind
-        source: /home/admin/adameds/private.key
-        target: /adameds-setting/private.key
       - type: bind
         source: /home/admin/adameds/.env.vault
         target: /adameds-setting/.env.vault
