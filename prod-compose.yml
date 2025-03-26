@@ -1,0 +1,25 @@
+services:
+  adaneds-setting:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      no_cache: true
+    container_name: adameds-setting-dev
+    image: adameds/setting-service:dev
+    ports:
+      - 8082:8082
+    restart: always
+    networks:
+      - adameds-network
+    environment:
+      DOTENV_KEY: ${DOTENV_KEY}
+      # API CONFIG
+      API_BASE: ${API_BASE}
+      API_VERSION: ${API_VERSION}
+    volumes:
+      - type: bind
+        source: /home/gitlab-runner/adameds/.env.vault
+        target: /adameds-setting/.env.vault
+networks:
+  adameds-network:
+    driver: bridge
