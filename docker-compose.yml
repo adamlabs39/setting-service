@@ -4,7 +4,7 @@ services:
       context: ./
       dockerfile: Dockerfile
       no_cache: true
-    container_name: adameds-setting-dev
+    container_name: api-adameds-setting
     image: adameds/setting-service:dev
     ports:
       - 8082:8082
@@ -12,14 +12,14 @@ services:
     networks:
       - adameds-network
     environment:
-      DOTENV_KEY: ${DOTENV_KEY}
+      INFISICAL_TOKEN: ${INFISICAL_TOKEN}
       # API CONFIG
       API_BASE: ${API_BASE}
       API_VERSION: ${API_VERSION}
-    volumes:
-      - type: bind
-        source: /home/engineer/adameds/.env.vault
-        target: /adameds-setting/.env.vault
+    # volumes:
+    #   - type: bind
+    #     source: /home/engineer/adameds/.env.vault
+    #     target: /adameds-setting/.env.vault
 networks:
   adameds-network:
     driver: bridge
